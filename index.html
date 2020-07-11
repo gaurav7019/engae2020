@@ -17,31 +17,67 @@
                 </div>
             </div>
             <div class="mid">
-                <div class="head">
-                    <h3>Tic Tac Toe Game</h3>
+                <div class="launchForm">
+                    <div class="head">
+                        <h3>Tic Tac Toe Game</h3>
+                    </div>
+                    <div>
+                        <h4 class="twoPlayerHead">
+                            Two Player Game
+                        </h4>
+                    </div>
+                    <div class="form">
+                        <div class="formElements">
+                            <label for="p1Name">Player 1 Name</label>
+                            <input type="text" id = "p1Name">    
+                        </div>
+                        <div class="formElements">
+                            <label for="p2Name">Player 2 Name</label>
+                            <input type="text" id = "p2Name">    
+                        </div>
+                        <div class="button">
+                            <input type="submit" name="submitButton" id="submitButton">
+                        </div>
+                    </div>
+                </div>
+                <div class="board hideBoard">
+                    <div class="head">
+                        <h3>Tic Tac Toe Game</h3>
+                    </div>
+                    <div class="turn">
+                        <div><h1 id="turnIndicator">It's <span id="playerLabel">Player 1</span>'s turn</h1></div>
+                    </div>
                     <div class="container-out">
                         <div class="container-in">
                         <div class="table-container">
                             <table align="center">
                             <tr>
+                                <td></td>
+                                <th scope="col" class="chead"><div >A</div></th>
+                                <th scope="col" class="chead"><div >B</div></th>
+                                <th scope="col" class="chead"><div >C</div></th>
+                            </tr>    
+                            <tr>
+                                <th scope = "row" class="rhead"><div >1</div></th>
                                 <td><div class="box"></div></td>
                                 <td><div class="box"></div></td>
                                 <td><div class="box"></div></td>
                             </tr>
                             <tr>
+                                <th scope = "row" class="rhead"><div><span>2</span></div></th>
                                 <td><div class="box"></div></td>
                                 <td><div class="box"></div></td>
                                 <td><div class="box"></div></td>
                             </tr>
                             <tr>
+                                <th scope = "row" class="rhead"><div><span>3</span></div></th>
                                 <td><div class="box"></div></td>
                                 <td><div class="box"></div></td>
                                 <td><div class="box"></div></td>
                             </tr>
                             </table>
-                    
-                            <h2 id="message">Player <span id="winner"></span> Wins</h2>
                             <button id="reset">Reset</button>
+                            <button id="backToMenu">Go Back</button>
                         </div>
                         </div>
                     </div>

@@ -22,10 +22,28 @@
     width: 100%;
 }
 
+.hideBoard{
+  display: none;
+}
+
+.twoPlayerHead{
+  text-align: center;
+  font-size: 30px;
+  margin: 10px 0px;
+}
+
 .head{
     text-align: center;
     font-size: 1.5em;
     color: gray;
+}
+
+/* Form Propertes*/
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 /* Pane Properties */
 
@@ -44,6 +62,19 @@
     padding-left: 10px  ;
 }
 
+#turnIndicator{
+    color: #232323;
+    font-size: 25px;
+}
+
+.turn{
+    display: flex;
+    justify-content: center;
+    color: #dee9ec;
+    margin-top: 25px;
+}
+
+
 .player{
     color: honeydew;
     margin: 25px 0px 8px 0px;
@@ -58,6 +89,17 @@
 }
 
 /* Grid CSS Properties */
+
+.chead{
+    padding: 10px 0px;
+    background: #273C2C;
+    color: white;
+}
+.rhead{
+    background: #273C2C;
+    color: white;
+    padding: 0px 12px;
+}
 
 .container-out {
     font-family: "Fira Sans", sans-serif;
@@ -81,7 +123,7 @@
     background: #dee9ec;
     text-align: center;
     vertical-align: center;
-    font-size: 50px;
+    font-size: 90px;
     font-weight: 900;
     cursor: pointer;
   }
