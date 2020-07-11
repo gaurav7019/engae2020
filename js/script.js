@@ -140,6 +140,7 @@ document.getElementById("reset").addEventListener("click", function() {
     boxes[i].style.color = "black";
   }
   currentPlayer = "x";
+  playerlabel.textContent = name1;
   document.getElementById("message").style.display = "none";
   document.getElementById("player").innerHTML = "X";
   gameStatus = "Game On";
