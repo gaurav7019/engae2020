@@ -6,6 +6,7 @@ let playerlabel = document.querySelector("#playerLabel");
 var p1 = document.getElementById("p1Name");
 var p2 = document.getElementById("p2Name");
 let back = document.querySelector("#backToMenu")
+var winning = document.querySelector(".turnIndicator");
 
 let submit = document.querySelector("#submitButton");
 submit.addEventListener("click", startTwoPlayer);
@@ -20,14 +21,16 @@ function startTwoPlayer(){
 
 function setName(){
     if(!name1){
-      nameArr[0].textContent = "Player 1";
+      name1 = "Player 1"
+      nameArr[0].textContent = name1;
     }
     else{
       nameArr[0].textContent = name1;
     }
 
     if(!name2){
-      nameArr[1].textContent = "Player 2"
+      name2 = "Player 2"
+      nameArr[1].textContent = name2;
     }
     else{
       nameArr[1].textContent = name2;
@@ -51,6 +54,7 @@ back.addEventListener("click", ()=>{
 
   document.querySelector(".launchForm").classList.remove("hideBoard");
   document.querySelector(".board").classList.add("hideBoard");
+  gameStatus = true;
 })
 
 //stores player turns
@@ -58,7 +62,7 @@ let currentPlayer = "x";
 let currentPlayerName = name1;
 
 //stores the status of the game, whether its over or still in play
-let gameStatus = "Game On";
+let gameStatus = true;
 
 //Gets all Boxes elements
 const boxes = document.getElementsByClassName("box");
@@ -68,7 +72,7 @@ for (let i = 0; i < boxes.length; i++) {
   //adds event listener to each box;
   boxes[i].addEventListener("click", function() {
     //checks if the box has an x or an o in it and also checks if the game is still on
-    if (boxes[i].innerHTML.trim() == "" && gameStatus == "Game On") {
+    if (boxes[i].innerHTML.trim() == "" && gameStatus) {
       //adds x or o for the current play in their choosen box
       boxes[i].textContent = currentPlayer;
 
@@ -141,12 +145,11 @@ document.getElementById("reset").addEventListener("click", function() {
   }
   currentPlayer = "x";
   playerlabel.textContent = name1;
-  document.getElementById("message").style.display = "none";
-  document.getElementById("player").innerHTML = "X";
-  gameStatus = "Game On";
+  gameStatus = true;
 });
 
 //displays the winner
+
 function showWinner(x, y, z) {
   boxes[x].style.backgroundColor = "#0d8b70";
   boxes[x].style.color = "white";
@@ -154,8 +157,14 @@ function showWinner(x, y, z) {
   boxes[y].style.color = "white";
   boxes[z].style.background = "#0d8b70";
   boxes[z].style.color = "white";
-  document.getElementById("winner").innerHTML =
-    currentPlayer == "x" ? "O" : "X";
-  document.getElementById("message").style.display = "block";
-  gameStatus = "Game Over";
+  gameStatus = false;
+  playerlabel.classList.remove("turnIndicator");
+  playerlabel.classList.add("winMessage");
+  
+  if(currentPlayer == 'o'){
+    winning.textContent = name1 + " wins!";
+  }
+  else{
+    winning.textContent = name2 + " wins!";
+  }
 }

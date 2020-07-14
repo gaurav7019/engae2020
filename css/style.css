@@ -62,7 +62,7 @@
     padding-left: 10px  ;
 }
 
-#turnIndicator{
+.turnIndicator{
     color: #232323;
     font-size: 25px;
 }
@@ -104,6 +104,13 @@
 .container-out {
     font-family: "Fira Sans", sans-serif;
     padding: 15px 0;
+  }
+
+  .winMessage{
+    font-size: 30px;
+    color: white;
+    background-color: darkgreen;
+    padding: 10px;
   }
 
   .container-in {
