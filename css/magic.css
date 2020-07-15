@@ -22,30 +22,17 @@
     width: 100%;
 }
 
-.hideBoard{
-  display: none;
-}
-
 .twoPlayerHead{
-  text-align: center;
-  font-size: 30px;
-  margin: 10px 0px;
+    text-align: center;
+    font-size: 30px;
+    margin: 10px 0px;
 }
-
+  
 .head{
     text-align: center;
     font-size: 1.5em;
     color: gray;
 }
-
-/* Form Propertes*/
-.form{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-/* Pane Properties */
 
 .user1{
     display: flex;
