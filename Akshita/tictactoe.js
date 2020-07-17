@@ -1,34 +1,61 @@
-var origState;
+//var origState;
 
 var box= document.querySelectorAll("td");
 
 var currentPlayer="O";
 
-var si= State();
+var currentState;
 
 function newGame(){
 
     for(var i=0; i<box.length; i++){
         box[i].textContent="";
-    }  
-    humanTurn();
+    } 
+
+    var si= new State(undefined);
+    currentState=si;
+
+    humanTurn(currentState);
+    
+    while(!currentState.isGameOver()){
+        //Alternate turns of Human and AI
+        console.log("humanTurnDone!");
+        if(currentPlayer==="X"){
+            humanTurn(currentState);
+            currentPlayer="O";
+        }
+
+        if(currentPlayer==="O"){
+            makeMove(currentState, 3 , "X");
+            currentPlayer="X";
+        }
+    }
+
 }
 
-function humanTurn(){
+function humanTurn(state){
 
     for(var i=0; i<box.length; i++){
-
+        var moveDone=false;
         box[i].addEventListener("click", function(){
             //currentPlayer= currentPlayer=== "X" ? "O" : "X";
-            if(this.textContent===""){
-                //this.textContent="currentPlayer";
-                this.textContent="O";
-                var s=State(si);
-                s.board.insert["O", i];
+            //if(!state.isGameOver()){
+                if(this.textContent==""){
+                    //this.textContent="currentPlayer";
+                    this.textContent="O";
+                    
+                    //state.board[index]="O";
+                    var j= this.getAttribute("value");
+                    state.board[j]="O";
 
-            }
+                    currentState=state;
+                    moveDone=true;
+                    //currentPlayer="O";
+                }   
         })
-
+        if(moveDone){
+            break;
+        }
     }
 }
 
@@ -40,29 +67,29 @@ var start= document.querySelector("#start");
 
 start.addEventListener("click", newGame);
 
-while(!State.isGameOver){
-    //Alternate turns of Human and AI
-
-    if(currentPlayer==="X"){
-        humanTurn();
-        currentPlayer="O";
-    }
-
-    if(currentPlayer==="O"){
-        makeMove(state, depth, "X");
-        currentPlayer="X";
-    }
-}
 
 
+// if(State.isGameOver()){
+//     for(int i=0; i<box.length; i++){
+//         box[i].removeEventListener("click", function(){
+//             if(this.textContent===""){
+//                 //this.textContent="currentPlayer";
+//                 this.textContent="O";
+//                 var s=State(si);
+//                 s.board.insert["O", i];
+
+//             }
+//         })
+//     }
+// }
 
 
-var State = function(old){
+function State(old){
 
     this.player = "";
-    this.oMovesCount = 0;
-    this.winner = "undefined";
-    this.board = [];
+    // this.oMovesCount = 0;
+    this.winner = "undeclared";
+    this.board = ["E", "E","E", "E","E", "E","E", "E", "E" ];
 
 
     if(typeof old !== "undefined") {
@@ -73,7 +100,7 @@ var State = function(old){
             this.board[itr] = old.board[itr];
         }
 
-        this.oMovesCount = old.oMovesCount;
+        // this.oMovesCount = old.oMovesCount;
         this.result = old.result;
         this.player = old.player;
     }
@@ -86,7 +113,7 @@ var State = function(old){
     this.availableCells= function() {
         var indxs = [];
         for(var itr = 0; itr < 9 ; itr++) {
-            if(this.board[itr] === "E") {
+            if(this.board[itr] == "E") {
                 indxs.push(itr);
             }
         }
@@ -103,6 +130,7 @@ var State = function(old){
 
 
     this.isGameOver = function() {
+        console.log("EnterWhileLoop!");
         var B = this.board;
 
         //check rows
@@ -129,7 +157,7 @@ var State = function(old){
             }
         }
 
-        var available = this.emptyCells();
+        var available = this.availableCells();
         if(available.length == 0) {
             //the game is draw
             this.winner = "draw"; //update the state result
@@ -148,7 +176,7 @@ function minimax(state, depth, playertype){
     if(state.isGameOver() || depth == this.max_depth){
         //return final score of minimax function
         if(state.winner==="X"){
-            return [null, 100 - depth];
+            return [null, 100 - depth]; //correct sign of depth
         }
         else if(state.winner==="O"){
             return [null, -100 + depth];
@@ -226,6 +254,7 @@ function makeMove(state, depth, playertype){
     var s=State(state);
     box[move].textContent="X";
     s.board.insert["X", move];
+    currentState=s;
 
     // if(playertype=="max"){
     //     var s=State(state)
