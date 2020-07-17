@@ -1,7 +1,7 @@
 <html>
     <head>
-        <title> Tic Tac Toe </title>
-        <link rel="stylesheet" href="css/style.css">
+        <title>TTT against AI - Magic Square</title>
+        <link rel="stylesheet" href="css/magic.css">
     </head>
     <body>
         <div class="container">
@@ -21,29 +21,8 @@
                     <div class="head">
                         <h3>Tic Tac Toe Game</h3>
                     </div>
-                    <div>
-                        <h4 class="twoPlayerHead">
-                            Two Player Game
-                        </h4>
-                    </div>
-                    <div class="form">
-                        <div class="formElements">
-                            <label for="p1Name">Player 1 Name</label>
-                            <input type="text" id = "p1Name">    
-                        </div>
-                        <div class="formElements">
-                            <label for="p2Name">Player 2 Name</label>
-                            <input type="text" id = "p2Name">    
-                        </div>
-                        <div class="button">
-                            <input type="submit" name="submitButton" id="submitButton">
-                        </div>
-                    </div>
                 </div>
-                <div class="board hideBoard">
-                    <div class="head">
-                        <h3>Tic Tac Toe Game</h3>
-                    </div>
+                <div class="board">
                     <div class="turn">
                         <div><h1 class="turnIndicator">It's <span id="playerLabel">Player 1</span>'s turn</h1></div>
                     </div>
@@ -83,7 +62,6 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
             <div class="right">
@@ -92,12 +70,12 @@
                         <img src="./images/person.png">
                     </div>
                     <div class="info">
-                        <p class="player">Player 2</p>
-                        <p class="playerName"></p>
+                        <p class="player">AI Agent</p>
+                        <p class="playerName">Agent X</p>
                     </div>
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="js/twoPlayer.js"></script>
+        <script type="text/javascript" src="js/magic.js"></script>
     </body>
 </html>
