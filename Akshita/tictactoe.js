@@ -6,6 +6,8 @@ var currentPlayer="O";
 
 var currentState;
 
+var max_depth = 4;
+
 function newGame(){
 
     for(var i=0; i<box.length; i++){
@@ -15,25 +17,6 @@ function newGame(){
     var si= new State(undefined);
     currentState=si;
 
-    humanTurn(currentState);
-    
-    while(!currentState.isGameOver()){
-        //Alternate turns of Human and AI
-        console.log("humanTurnDone!");
-        if(currentPlayer==="X"){
-            humanTurn(currentState);
-            currentPlayer="O";
-        }
-
-        if(currentPlayer==="O"){
-            makeMove(currentState, 3 , "X");
-            currentPlayer="X";
-        }
-    }
-
-}
-
-function humanTurn(state){
 
     for(var i=0; i<box.length; i++){
         var moveDone=false;
@@ -46,18 +29,19 @@ function humanTurn(state){
                     
                     //state.board[index]="O";
                     var j= this.getAttribute("value");
-                    state.board[j]="O";
+                    currentState.board[j]="O";
 
-                    currentState=state;
-                    moveDone=true;
-                    //currentPlayer="O";
+                    if(!currentState.isGameOver()){
+                        makeMove(currentState, 0 , true);
+                    }
                 }   
         })
-        if(moveDone){
-            break;
-        }
+
     }
+
 }
+
+
 
 var reset= document.querySelector("#reset");
 
@@ -113,24 +97,16 @@ function State(old){
     this.availableCells= function() {
         var indxs = [];
         for(var itr = 0; itr < 9 ; itr++) {
-            if(this.board[itr] == "E") {
+            if(this.board[itr] === "E") {
                 indxs.push(itr);
             }
         }
         return indxs;
     }
 
-    // this.isFull=function(){
-
-    // }
-
-    // this.isEmpty = function(){
-
-    // }
-
 
     this.isGameOver = function() {
-        console.log("EnterWhileLoop!");
+        //console.log("EnterWhileLoop!");
         var B = this.board;
 
         //check rows
@@ -172,44 +148,39 @@ function State(old){
 
 
 
-function minimax(state, depth, playertype){
-    if(state.isGameOver() || depth == this.max_depth){
+function minimax(state, depth, isMaximizing){
+    if(state.isGameOver() || depth==max_depth){
         //return final score of minimax function
         if(state.winner==="X"){
-            return [null, 100 - depth]; //correct sign of depth
+            return {move: undefined, score: 100 - depth}; //correct sign of depth
         }
         else if(state.winner==="O"){
-            return [null, -100 + depth];
+            return {move: undefined, score: -100 + depth};
         }
-        return [null, 0] ;
+        return {move: undefined, score: 0} ;
     }
 
-    var move;
-    var score;
+    var result = {move: undefined, score: undefined};
 
-    if(playertype=="max"){
-        var best = [null, -infinity]
+    if(isMaximizing){
+        var best = {move: undefined, score: -100000};
 
         var availablePositions = state.availableCells();
-
-        // var availableNextStates = availablePositions.map(function(){
-            
-        //     var nextState=State(state);
-        //     nextState.insert("O", availablePositions);
-        // });
-
-        // var availableNextStates=[]
+        //console.log(state.board);
+        //console.log(availablePositions);
 
         for(var i=0; i<availablePositions.length; i++){
 
-            var nextState=State(state);
-            nextState.insert("X", availablePositions[i]);
+            var nextState= new State(state);
+            //nextState.insert("X", availablePositions[i]);
+            nextState.board[availablePositions[i]]="X";
             // var current=[availablePositions[i], -infinity]
-            [move, score] = minimax(nextState, depth - 1, playertype="min");
-            move=availablePositions[i];
+            console.log(minimax(nextState, depth + 1, false));
+            var smallOutput = minimax(nextState, depth + 1, false);
+            smallOutput.move=availablePositions[i];
 
-            if(score>best.score){
-                best=[move,score];
+            if(smallOutput.score > best.score){
+                best=smallOutput; //make object
             }
 
             // availableNextStates.insert(nextState, i);
@@ -220,20 +191,21 @@ function minimax(state, depth, playertype){
 
     }
 
-    if(playertype=="min"){
-        var best = [null, +infinity]
+    if(!isMaximizing){
+        var best = {move: undefined, score: 100000};
 
         var availablePositions = state.availableCells();
 
         for(var i=0; i<availablePositions.length; i++){
 
-            var nextState=State(state);
-            nextState.insert("O", availablePositions[i]);
-            [move, score] = minimax(nextState, depth - 1, playertype="max");
-            move=availablePositions[i];
+            var nextState= new State(state);
+            //nextState.insert("O", availablePositions[i]);
+            nextState.board[availablePositions[i]]="O";
+            var smallOutput = minimax(nextState, depth + 1, true);
+            smallOutput.move=availablePositions[i];
 
-            if(score<best.score){
-                best=[move,score];
+            if(smallOutput.score < best.score){
+                best= smallOutput;
             }
 
         }
@@ -244,28 +216,16 @@ function minimax(state, depth, playertype){
 
 }
 
+function makeMove(state, depth, isMaximizing){
 
-function makeMove(state, depth, playertype){
-    var move;
-    var score;
+    var result =minimax(state, depth, isMaximizing);
 
-    [move,score]=minimax(state, depth, playertype);
+    console.log(result.move);
 
-    var s=State(state);
-    box[move].textContent="X";
-    s.board.insert["X", move];
+    var s= new State(state);
+    box[result.move].textContent="X";
+    //s.board.insert["X", result.move];
+    s.board[result.move]="X";
     currentState=s;
-
-    // if(playertype=="max"){
-    //     var s=State(state)
-    //     s.board.insert["O", move];
-    //     box[move].textContent="O";
-    // }
-
-    // else if(playertype=="min"){
-    //     var s=State(state)
-    //     s.board.insert["X", move];
-    //     box[move].textContent="X";
-    // }
-    
+   
 }
