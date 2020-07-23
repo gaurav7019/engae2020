@@ -1,0 +1,38 @@
+.container{
+	display: flex;
+	flex-direction: row;
+}
+.left{
+	width: 30%;
+	height: 100vh;
+	background-color: #232323;
+}
+.right{
+	width: 70%;
+	height: 100vh	;
+	margin: 0 auto;
+}
+table{
+	margin: 0 auto;
+	padding-top: 200px;
+}
+td{
+	background: #232323;
+	cursor: pointer;
+	color: white;
+	text-align: center;
+}
+
+.heading{
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 50px;
+	color: whitesmoke;
+}
+
+.leftHead{
+	margin: 0 auto;
+	color: whitesmoke;
+	padding-top: 50px;
+	text-align: center;
+}

@@ -6,8 +6,8 @@ var p1 = document.getElementById("p1Name");
 var p2 = document.getElementById("p2Name");
 let back = document.querySelector("#backToMenu")
 var winning = document.querySelector(".turnIndicator");
-
 let submit = document.querySelector("#submitButton");
+
 submit.addEventListener("click", startTwoPlayer);
 
 function startTwoPlayer(){
