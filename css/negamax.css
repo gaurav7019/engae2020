@@ -30,6 +30,16 @@ td{
 	color: whitesmoke;
 }
 
+.resultDisplay{
+	text-align: center;
+	color: whitesmoke;
+}
+
+#notification{
+	text-align: center;
+	color: white;
+}
+
 .leftHead{
 	margin: 0 auto;
 	color: whitesmoke;

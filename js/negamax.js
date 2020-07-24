@@ -21,13 +21,13 @@ var othdig1;
 var total_move;
 var round = 0;
 var takeInput;
+var checkBool = true;
 
 function setRows(num){
-    takeInput = Number(num);
+	takeInput = Number(num);
 }
 
-function generateFields() 
-{
+function generateFields(){
 	var input = takeInput;
 	number = Number(input);  
 	if(number==3)
@@ -48,28 +48,29 @@ function generateFields()
 
 	jcell = new Array(number);
 
-	for (var i = 0; i < number; i++) 
-	{
-		jcell[i] = new Array(number);
-		var newTR = document.createElement('tr');
-		
-		for(var j=0;j<number;j++) 
-		{
-			var newTD = document.createElement('td');
-			jcell[i][j] = newTD;
-			newTD.classList.add('cell');
-			newTD.style.width="50px";
-			newTD.style.height="50px";
-			newTD.innerHTML="";
-			newTD.dataset.row = i;
-			newTD.dataset.col = j;
-			newTD.addEventListener('click',handleClick);
-			newTR.appendChild(newTD);
-
+	if(checkBool){
+		for (var i = 0; i < number; i++) {
+			jcell[i] = new Array(number);
+			var newTR = document.createElement('tr');
+			
+			for(var j=0;j<number;j++) {
+				var newTD = document.createElement('td');
+				jcell[i][j] = newTD;
+				newTD.classList.add('cell');
+				newTD.style.width="50px";
+				newTD.style.height="50px";
+				newTD.innerHTML="";
+				newTD.dataset.row = i;
+				newTD.dataset.col = j;
+				newTD.addEventListener('click',handleClick);
+				newTR.appendChild(newTD);
+	
+			}
+			tableId.appendChild(newTR);
 		}
-		tableId.appendChild(newTR);
+		checkBool = false;
 	}
-	document.getElementById("resetButton").disabled = true;
+	// document.getElementById("resetButton").disabled = true;
 }
 
 function handleClick(e)

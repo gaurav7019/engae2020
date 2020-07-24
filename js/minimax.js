@@ -4,9 +4,10 @@ var max_depth;
 var startingPlayer;
 var player;
 var resultDisplay = document.querySelector("p");
+var boolSugg;
 
-function showHelp(){
-    alert("Simple minimax hai lodu");
+function showHelp(str){
+    boolSugg = str == "yes" ? true : false ;    
 }
 
 function setDepth(num){
@@ -40,6 +41,7 @@ function newGame(){
 
     for(var i=0; i<box.length; i++){
         box[i].addEventListener("click", function(){
+            this.style.backgroundColor = "gray";
             if(this.textContent=="" && !currentState.isGameOver()){
                 this.textContent="O";
 
@@ -57,7 +59,7 @@ function newGame(){
 function State(old){
 
     this.player = "";
-    this.winner;
+    this.winner = {direction: undefined, index: undefined, symbol: undefined};
     this.board = ["E", "E","E", "E","E", "E","E", "E", "E" ];
 
     if(typeof old !== "undefined") {
@@ -86,7 +88,7 @@ function State(old){
         //check rows
         for(var i = 0; i <= 6; i = i + 3) {
             if(B[i] !== "E" && B[i] === B[i + 1] && B[i + 1] == B[i + 2]) {
-                this.winner = {direction: "H", index: i} ; //update the state result
+                this.winner = {direction: "H", index: i, symbol: B[i]} ; //update the state result
                 return true;
             }
         }
@@ -94,7 +96,7 @@ function State(old){
         //check columns
         for(var i = 0; i <= 2 ; i++) {
             if(B[i] !== "E" && B[i] === B[i + 3] && B[i + 3] === B[i + 6]) {
-                this.winner = {direction: "V", index: i}; //update the state result
+                this.winner = {direction: "V", index: i, symbol: B[i]}; //update the state result
                 return true;
             }
         }
@@ -102,7 +104,7 @@ function State(old){
         //check diagonals
         for(var i = 0, j = 4; i <= 2 ; i = i + 2, j = j - 2) {
             if(B[i] !== "E" && B[i] == B[i + j] && B[i + j] === B[i + 2*j]) {
-                this.winner = {direction: "D", index: i} ; //update the state result
+                this.winner = {direction: "D", index: i, symbol: B[i]} ; //update the state result
                 return true;
             }
         }
@@ -110,7 +112,7 @@ function State(old){
         var available = this.availableCells();
         if(available.length == 0) {
             //the game is draw
-            this.winner = "draw"; //update the state result
+            this.winner = {direction: undefined, index: undefined, symbol: "draw"}; //update the state result
             return true;
         }
         else {
@@ -120,16 +122,19 @@ function State(old){
 
     this.showResult = function(){
         var checkBool = currentState.isGameOver();
-        if(checkBool && currentState.winner != "draw"){
+        if(checkBool){ //change here
             //useful variables
             var direction = currentState.winner.direction;
             var index = currentState.winner.index;
             //displaying result
+            if(currentState.winner.symbol == "draw"){
+                resultDisplay.textContent = "Alas! It's a draw!";
+            }
             if(box[index].textContent == "O"){
                 resultDisplay.textContent = "Woah, You deafeated AI 🎉✨🎉🎉";
             }
             else if(box[index].textContent == "X"){
-                resultDisplay.textContent = "You lost 😑😑, Better luck next time";
+                resultDisplay.textContent = "You lost   , Better luck next time";
             }
 
             if(direction == "H"){
@@ -225,12 +230,13 @@ function State(old){
 // }
 
 function minimax(state, depth, alpha, beta, isMaximizing){
+
     if(state.isGameOver() || depth==max_depth){
         //return static evalution of the state
-        if(state.winner==="X"){
+        if(state.winner.symbol==="X"){
             return {move: undefined, score: 100 - depth}; //correct sign of depth
         }
-        else if(state.winner==="O"){
+        else if(state.winner.symbol==="O"){
             return {move: undefined, score: -100 + depth};
         }
         return {move: undefined, score: 0} ;
@@ -292,10 +298,10 @@ function minimax(state, depth, alpha, beta, isMaximizing){
 function sugg(state, depth, alpha, beta, isMaximizing){
     if(state.isGameOver() || depth==max_depth){
         //return static evalution of the state
-        if(state.winner==="O"){
+        if(state.winner.symbol==="O"){
             return {move: undefined, score: 100 - depth}; //correct sign of depth
         }
-        else if(state.winner==="X"){
+        else if(state.winner.symbol==="X"){
             return {move: undefined, score: -100 + depth};
         }
         return {move: undefined, score: 0} ;
@@ -358,14 +364,15 @@ function makeMove(state, depth, isMaximizing){
 
     var result = minimax(state, depth, -Infinity, Infinity, isMaximizing);
 
-
     var s= new State(state);
     box[result.move].textContent="X";
     s.board[result.move]="X";
     currentState=s;
     var suggi=sugg(currentState, 0 , false, "O");
     var i=suggi.move;
-    console.log("human suggestion " + i);
+    if(boolSugg){
+        box[i].style.backgroundColor = "#BFF098";
+    }
     currentState.showResult();
 }
 

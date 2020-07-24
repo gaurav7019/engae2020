@@ -47,11 +47,15 @@
                           <li class="menu-item"><a style="cursor: pointer" onclick="setRows(9)">9x9</a></li>
                         </ol>
                       </li>
-                      <li class="menu-item" style="margin-top: 250px; position: fixed; left: 150px;"><a onclick="generateFields(); this.disabled = true" style="cursor: pointer;">Start Game</a></li>
+                      
+                      <li class="menu-item" style="margin-top: 250px; position: fixed; left: 150px;"><a onclick="location.reload()" style="cursor: pointer;">Reset Game</a></li>
+                      <li id="startButton" class="menu-item" ><a onclick="generateFields(); this.disabled = true" style="cursor: pointer;">Start Game</a></li>
                   </nav>
                 </div>
             <div class="right">
                 <h1 class="heading">NegaMax : The ultimate TTT</h1>
+                <h2 class="resultDisplay">Result appear here: <span id="result"></span></h2>
+                <h3 id="notification"></h3>
                 <table id="table">
 
                 </table>            
