@@ -11,6 +11,10 @@
     width: 100%;
 
 }
+
+#playerLabel{
+  color: black;
+}
 .mid{
     flex-grow: 5;
     width: 100%;
@@ -99,6 +103,14 @@
     background: #273C2C;
     color: white;
     padding: 0px 12px;
+}
+
+.backBase{
+  text-decoration: none;
+  background-color: black;
+  color: #ffffff;
+  margin-top: 40px;
+  padding: 10px;
 }
 
 .container-out {

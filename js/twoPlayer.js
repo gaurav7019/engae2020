@@ -34,7 +34,7 @@ function setName(){
     else{
       nameArr[1].textContent = name2;
     }
-    player.textContent = name1;
+    player.textContent = "It's " + name1 + "'s turn!";
 }
 
 back.addEventListener("click", ()=>{
@@ -84,7 +84,7 @@ for (let i = 0; i < boxes.length; i++) {
       currentPlayer = (currentPlayer == "x" ? "o" : "x");
       currentPlayerName = (currentPlayer == "x" ? name1 : name2);
 
-      player.textContent = currentPlayerName;
+      player.textContent = "It's " + currentPlayerName + "\'s turn";
 
     }
   });
@@ -114,7 +114,7 @@ document.getElementById("reset").addEventListener("click", function() {
     boxes[i].style.color = "black";
   }
   currentPlayer = "x";
-  player.textContent = name1;
+  player.textContent = "It's " + name1 + "\'s turn";
   winning.textContent = "";
   gameStatus = true;
 });
@@ -128,7 +128,9 @@ function showWinner(x, y, z, currentPlayerName) {
   boxes[y].style.color = "white";
   boxes[z].style.background = "#0d8b70";
   boxes[z].style.color = "white";
+  player.textContent = "";
   winning.textContent = currentPlayerName + " has won";
+  
   gameStatus = false;
   
 }

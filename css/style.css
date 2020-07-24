@@ -16,7 +16,6 @@ div.buttons{
 }
 
 .buttonList{
-    float: inline-start;
     width: 50px;
     margin: 0 auto;
 }

@@ -4,11 +4,7 @@ var max_depth;
 var startingPlayer;
 var player;
 var resultDisplay = document.querySelector("p");
-var boolSugg;
 
-function showHelp(str){
-    boolSugg = str == "yes" ? true : false ;    
-}
 
 function setDepth(num){
     max_depth = Number(num);
@@ -41,9 +37,7 @@ function newGame(){
 
     for(var i=0; i<box.length; i++){
         box[i].addEventListener("click", function(){
-            if(this.style.backgroundColor === "rgb(191, 240, 152)"){
-                this.style.backgroundColor = "gray";
-            }
+
             if(this.textContent=="" && !currentState.isGameOver()){
                 this.textContent="O";
 
@@ -167,70 +161,6 @@ function State(old){
 };
 
 
-// function minimax(state, depth, isMaximizing){
-//     if(state.isGameOver() || depth==max_depth){
-//         //return final score of minimax function
-//         if(state.winner==="X"){
-//             return {move: undefined, score: 100 - depth}; //correct sign of depth
-//         }
-//         else if(state.winner==="O"){
-//             return {move: undefined, score: -100 + depth};
-//         }
-//         return {move: undefined, score: 0} ;
-//     }
-
-//     var result = {move: undefined, score: undefined};
-
-//     if(isMaximizing){
-//         var best = {move: undefined, score: -Infinity};
-
-//         var availablePositions = state.availableCells();
-
-//         for(var i=0; i<availablePositions.length; i++){
-
-//             var nextState= new State(state);
-//             //nextState.insert("X", availablePositions[i]);
-//             nextState.board[availablePositions[i]]="X";
-//             // var current=[availablePositions[i], -infinity]
-//             var smallOutput = minimax(nextState, depth + 1, false);
-//             smallOutput.move = availablePositions[i];
-
-//             if(smallOutput.score > best.score){
-//                 best=smallOutput; //make object
-//             }
-
-//         }
-
-//         return best;
-
-
-//     }
-
-//     if(!isMaximizing){
-//         var best = {move: undefined, score: Infinity};
-
-//         var availablePositions = state.availableCells();
-
-//         for(var i=0; i<availablePositions.length; i++){
-
-//             var nextState= new State(state);
-//             //nextState.insert("O", availablePositions[i]);
-//             nextState.board[availablePositions[i]]="O";
-//             var smallOutput = minimax(nextState, depth + 1, true);
-//             smallOutput.move=availablePositions[i];
-
-//             if(smallOutput.score < best.score){
-//                 best= smallOutput;
-//             }
-
-//         }
-
-//         return best;
-//     }
-
-
-// }
-
 function minimax(state, depth, alpha, beta, isMaximizing){
 
     if(state.isGameOver() || depth==max_depth){
@@ -297,70 +227,6 @@ function minimax(state, depth, alpha, beta, isMaximizing){
 
 }
 
-function sugg(state, depth, alpha, beta, isMaximizing){
-    if(state.isGameOver() || depth==max_depth){
-        //return static evalution of the state
-        if(state.winner.symbol==="O"){
-            return {move: undefined, score: 100 - depth}; //correct sign of depth
-        }
-        else if(state.winner.symbol==="X"){
-            return {move: undefined, score: -100 + depth};
-        }
-        return {move: undefined, score: 0} ;
-    }
-
-    var result = {move: undefined, score: undefined};
-
-    if(isMaximizing){
-        var best = {move: undefined, score: -Infinity};
-
-        var availablePositions = state.availableCells();
-
-        for(var i=0; i<availablePositions.length; i++){
-
-            var nextState= new State(state);
-            //nextState.insert("X", availablePositions[i]);
-            nextState.board[availablePositions[i]]="O";
-            // var current=[availablePositions[i], -infinity]
-            var smallOutput = sugg(nextState,depth + 1, alpha, beta, false);
-            smallOutput.move=availablePositions[i];
-
-            if(smallOutput.score > best.score){
-                best=smallOutput; //make object
-            }
-            alpha = Math.max(alpha, smallOutput.score);
-            if(beta <= alpha){
-                break;
-            }
-        }
-
-        return best;
-    }
-
-    if(!isMaximizing){
-        var best = {move: undefined, score: Infinity};
-        var availablePositions = state.availableCells();
-
-        for(var i=0; i<availablePositions.length; i++){
-            var nextState= new State(state);
-            nextState.board[availablePositions[i]]="X";
-            var smallOutput = sugg(nextState, depth + 1, alpha, beta, true);
-            smallOutput.move=availablePositions[i];
-
-            if(smallOutput.score < best.score){
-                best= smallOutput;
-            }
-
-            beta = Math.min(beta, smallOutput.score);
-            if(beta <= alpha){
-                break;
-            }
-        }
-        return best;
-    }
-
-
-}
 
 function makeMove(state, depth, isMaximizing){
 
@@ -370,11 +236,6 @@ function makeMove(state, depth, isMaximizing){
     box[result.move].textContent="X";
     s.board[result.move]="X";
     currentState=s;
-    var suggi=sugg(currentState, 0 , false, "O");
-    var i=suggi.move;
-    if(boolSugg){
-        box[i].style.backgroundColor = "#BFF098";
-    }
     currentState.showResult();
 }
 
