@@ -55,7 +55,7 @@ div.buttons{
     transition-delay: 0.2s;
   }
   body {
-    background: url("/images/bg.png") no-repeat fixed center;
+    background: url("https://gaurav7019.github.io/engage2020/images/bg.png") no-repeat fixed center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
