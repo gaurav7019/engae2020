@@ -1,7 +1,7 @@
 <html>
     <head>
         <title> Tic Tac Toe </title>
-        <link rel="stylesheet" href="css/twoplayer.css">
+        <link rel="stylesheet" href="./css/twoPlayer.css">
     </head>
     <body>
         <div class="container">
@@ -46,36 +46,27 @@
                     </div>
                     <div class="turn">
                         <div><h1 class="turnIndicator">It's <span id="playerLabel">Player 1</span>'s turn</h1></div>
+                        
                     </div>
+                    <h3 class="winMessage"></h3>
                     <div class="container-out">
                         <div class="container-in">
                             <div class="table-container">
                                 <table>
-                                    <!--
-                                <tr>
-                                    <td></td>
-                                    <th scope="col" class="chead"><div >A</div></th>
-                                    <th scope="col" class="chead"><div >B</div></th>
-                                    <th scope="col" class="chead"><div >C</div></th>
-                                </tr>
-                                -->    
                                     <tr>
-                                        <!--<th scope = "row" class="rhead"><div >1</div></th>-->
-                                        <td><div class="box"></div></td>
-                                        <td><div class="box"></div></td>
-                                        <td><div class="box"></div></td>
+                                        <td><div class="box" value="2"></div></td>
+                                        <td><div class="box" value="7"></div></td>
+                                        <td><div class="box" value="6"></div></td>
                                     </tr>
                                     <tr>
-                                        <!--<th scope = "row" class="rhead"><div><span>2</span></div></th>-->
-                                        <td><div class="box"></div></td>
-                                        <td><div class="box"></div></td>
-                                        <td><div class="box"></div></td>
+                                        <td><div class="box" value="9"></div></td>
+                                        <td><div class="box" value="5"></div></td>
+                                        <td><div class="box" value="1"></div></td>
                                     </tr>
                                     <tr>
-                                        <!--<th scope = "row" class="rhead"><div><span>3</span></div></th>-->
-                                        <td><div class="box"></div></td>
-                                        <td><div class="box"></div></td>
-                                        <td><div class="box"></div></td>
+                                        <td><div class="box" value="4"></div></td>
+                                        <td><div class="box" value="3"></div></td>
+                                        <td><div class="box" value="8"></div></td>
                                     </tr>
                                 </table>
                                 <button id="reset">Reset</button>
@@ -98,6 +89,6 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="js/twoPlayer.js"></script>
+        <script type="text/javascript" src="./js/twoPlayer.js"></script>
     </body>
 </html>
