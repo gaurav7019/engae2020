@@ -21,7 +21,6 @@ div.buttons{
 }
 
 
-
 @font-face {
     font-family: 'Varela Round';
     font-style: normal;
@@ -69,7 +68,7 @@ div.buttons{
   }
   .menu > ol {
     list-style: none;
-    margin: 30px 0;
+    /* margin: 30px 0; */
     padding: 0;
   }
   .menu > ol > li {
@@ -152,7 +151,7 @@ div.buttons{
   }
   .menu > ol .sub-menu {
     border-left: 1px solid #FBFBFB;
-    margin-left: 22.5px;
+    /* margin-left: 22.5px; */
     list-style: none;
     max-height: 0px;
     overflow: hidden;
@@ -196,8 +195,7 @@ div.buttons{
     .menu > ol {
       display: flex;
       flex-direction: column;
-      margin-left: 20em;
-      margin-right: 10em;
+      margin: 0 auto;
       max-width: none;
       text-align: center;
     }
@@ -205,8 +203,6 @@ div.buttons{
       border-top: 5px solid var(--accent-color);
       border-left: 0;
       display: inline-block;
-      margin-top: 5px;
-      margin-left: -5px;
       vertical-align: top;
       width: 120px;
     }
