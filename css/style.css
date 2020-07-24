@@ -6,6 +6,12 @@
     color:whitesmoke;
 }
 
+.heading{
+  color: white;
+  text-align: center;
+  margin: 0;
+}
+
 div.buttons{
     padding-bottom: 50px;
     width: 50%;
@@ -17,7 +23,6 @@ div.buttons{
 
 .buttonList{
     width: 50px;
-    margin: 0 auto;
 }
 
 
