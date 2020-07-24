@@ -28,10 +28,16 @@
 				  <li class="menu-item"><a style="cursor: pointer;" onclick="setRival('aiagent')">AI Agent</a></li>
 				</ol>
 			  </li>
+
 			  <li class="menu-item">
-				  <a style="cursor: pointer" onclick="showHelp()">Help</a>
-				</li>
-			  <li class="menu-item" style="margin-top: 320px; position: fixed; left: 150px;"><a onclick="newGame()" style="cursor: pointer;">New Game</a></li>
+				<a style="cursor: pointer;">Suggestions?</a>
+				<ol class="sub-menu">
+				  <li class="menu-item"><a style="cursor: pointer;" onclick="showHelp('yes')">Yes, please!</a></li>
+				  <li class="menu-item"><a style="cursor: pointer;" onclick="showHelp('no')">Not needed</a></li>
+				</ol>
+			  </li>
+			  	
+			  <li class="menu-item" style="margin-top: 250px; position: fixed; left: 150px;"><a onclick="newGame()" style="cursor: pointer;">New Game</a></li>
 			</ol>
 		  </nav>
 		</div>
@@ -58,6 +64,6 @@
 </div>
 	
 	
-<script type="text/javascript" src="./js/scipt_minimax.js"></script>
+<script type="text/javascript" src="./js/minimax.js"></script>
 </body>
 </html>
