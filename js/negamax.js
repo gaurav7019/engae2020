@@ -21,7 +21,7 @@ var othdig1;
 var total_move;
 var round = 0;
 var takeInput;
-var checkBool = true;
+var startCheck = document.getElementsByClassName("startButton");
 
 function setRows(num){
 	takeInput = Number(num);
@@ -48,7 +48,6 @@ function generateFields(){
 
 	jcell = new Array(number);
 
-	if(checkBool){
 		for (var i = 0; i < number; i++) {
 			jcell[i] = new Array(number);
 			var newTR = document.createElement('tr');
@@ -68,8 +67,8 @@ function generateFields(){
 			}
 			tableId.appendChild(newTR);
 		}
-		checkBool = false;
-	}
+		startCheck.setAttribute("onclick", "");
+		
 	// document.getElementById("resetButton").disabled = true;
 }
 

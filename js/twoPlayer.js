@@ -5,7 +5,7 @@ let player = document.querySelector("#playerLabel");
 var p1 = document.getElementById("p1Name");
 var p2 = document.getElementById("p2Name");
 let back = document.querySelector("#backToMenu")
-var winning = document.querySelector(".turnIndicator");
+var winning = document.querySelector(".winMessage");
 let submit = document.querySelector("#submitButton");
 
 submit.addEventListener("click", startTwoPlayer);
@@ -115,7 +115,7 @@ document.getElementById("reset").addEventListener("click", function() {
   }
   currentPlayer = "x";
   player.textContent = name1;
-  setName();
+  winning.textContent = "";
   gameStatus = true;
 });
 
@@ -128,7 +128,7 @@ function showWinner(x, y, z, currentPlayerName) {
   boxes[y].style.color = "white";
   boxes[z].style.background = "#0d8b70";
   boxes[z].style.color = "white";
-  // winning.innerHTML = (currentPlayerName + " has won!");
+  winning.textContent = currentPlayerName + " has won";
   gameStatus = false;
   
 }
