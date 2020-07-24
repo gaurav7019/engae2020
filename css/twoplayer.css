@@ -108,9 +108,9 @@
 
   .winMessage{
     font-size: 30px;
-    color: white;
-    background-color: darkgreen;
-    padding: 10px;
+    color: #000000;
+    margin: 0 auto;
+    text-align: center;
   }
 
   .container-in {

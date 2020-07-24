@@ -85,6 +85,8 @@ body {
   list-style: none;
   margin: 30px 0;
   padding: 0;
+  width: 30%;
+  position: fixed;
 }
 .menu > ol > li {
   background: #3c3c3c;
