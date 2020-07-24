@@ -128,7 +128,8 @@ function showWinner(x, y, z, currentPlayerName) {
   boxes[y].style.color = "white";
   boxes[z].style.background = "#0d8b70";
   boxes[z].style.color = "white";
-  player.textContent = currentPlayerName + " has won";
+  player.textContent = ""
+  winning.textContent = currentPlayerName + " has won";
   
   gameStatus = false;
   
