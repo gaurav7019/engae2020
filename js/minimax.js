@@ -41,7 +41,9 @@ function newGame(){
 
     for(var i=0; i<box.length; i++){
         box[i].addEventListener("click", function(){
-            this.style.backgroundColor = "gray";
+            if(this.style.backgroundColor === "rgb(191, 240, 152)"){
+                this.style.backgroundColor = "gray";
+            }
             if(this.textContent=="" && !currentState.isGameOver()){
                 this.textContent="O";
 
@@ -131,7 +133,7 @@ function State(old){
                 resultDisplay.textContent = "Alas! It's a draw!";
             }
             if(box[index].textContent == "O"){
-                resultDisplay.textContent = "Woah, You deafeated AI 🎉✨🎉🎉";
+                resultDisplay.textContent = "Woah, You deafeated AI";
             }
             else if(box[index].textContent == "X"){
                 resultDisplay.textContent = "You lost   , Better luck next time";

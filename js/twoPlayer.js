@@ -74,6 +74,11 @@ for (let i = 0; i < boxes.length; i++) {
     if (boxes[i].innerHTML.trim() == "" && gameStatus) {
       //adds x or o for the current play in their choosen box
       boxes[i].textContent = currentPlayer;
+      hasWonMagicSquare(currentPlayer, currentPlayerName);
+
+      if(!gameStatus){
+        
+      }
 
       //changes player turns
       currentPlayer = (currentPlayer == "x" ? "o" : "x");
@@ -81,58 +86,24 @@ for (let i = 0; i < boxes.length; i++) {
 
       player.textContent = currentPlayerName;
 
-      //checks 3 matching x's or o's
-      if (
-        boxes[0].innerHTML == boxes[1].innerHTML &&
-        boxes[1].innerHTML == boxes[2].innerHTML &&
-        boxes[0].innerHTML.trim() != ""
-      ) {
-        showWinner(0, 1, 2);
-      } else if (
-        boxes[3].innerHTML == boxes[4].innerHTML &&
-        boxes[4].innerHTML == boxes[5].innerHTML &&
-        boxes[3].innerHTML.trim() != ""
-      ) {
-        showWinner(3, 4, 5);
-      } else if (
-        boxes[6].innerHTML == boxes[7].innerHTML &&
-        boxes[7].innerHTML == boxes[8].innerHTML &&
-        boxes[6].innerHTML.trim() != ""
-      ) {
-        showWinner(6, 7, 8);
-      } else if (
-        boxes[0].innerHTML == boxes[3].innerHTML &&
-        boxes[3].innerHTML == boxes[6].innerHTML &&
-        boxes[0].innerHTML.trim() != ""
-      ) {
-        showWinner(0, 3, 6);
-      } else if (
-        boxes[1].innerHTML == boxes[4].innerHTML &&
-        boxes[4].innerHTML == boxes[7].innerHTML &&
-        boxes[1].innerHTML.trim() != ""
-      ) {
-        showWinner(1, 4, 7);
-      } else if (
-        boxes[2].innerHTML == boxes[5].innerHTML &&
-        boxes[5].innerHTML == boxes[8].innerHTML &&
-        boxes[2].innerHTML.trim() != ""
-      ) {
-        showWinner(2, 5, 8);
-      } else if (
-        boxes[0].innerHTML == boxes[4].innerHTML &&
-        boxes[4].innerHTML == boxes[8].innerHTML &&
-        boxes[0].innerHTML.trim() != ""
-      ) {
-        showWinner(0, 4, 8);
-      } else if (
-        boxes[2].innerHTML == boxes[4].innerHTML &&
-        boxes[4].innerHTML == boxes[6].innerHTML &&
-        boxes[2].innerHTML.trim() != ""
-      ) {
-        showWinner(2, 4, 6);
-      }
     }
   });
+}
+
+function hasWonMagicSquare(currentPlayer, currentPlayerName) {
+  for (var i = 0; i < 9; i++){
+    for (var j = 0; j < 9; j++){
+      for (var k = 0; k < 9; k++){
+        if (i != j && i != k && j != k){
+          if (boxes[i].textContent == currentPlayer && boxes[j].textContent == currentPlayer && boxes[k].textContent == currentPlayer){
+            if (Number(boxes[i].getAttribute("value")) + Number(boxes[j].getAttribute("value"))  + Number(boxes[k].getAttribute("value"))  == 15){
+              showWinner(i, j, k, currentPlayerName); 
+            } 
+          }             
+        }
+      }
+    }
+  }
 }
 
 //resets the game
@@ -144,17 +115,20 @@ document.getElementById("reset").addEventListener("click", function() {
   }
   currentPlayer = "x";
   player.textContent = name1;
+  setName();
   gameStatus = true;
 });
 
 //displays the winner
 
-function showWinner(x, y, z) {
+function showWinner(x, y, z, currentPlayerName) {
   boxes[x].style.backgroundColor = "#0d8b70";
   boxes[x].style.color = "white";
   boxes[y].style.background = "#0d8b70";
   boxes[y].style.color = "white";
   boxes[z].style.background = "#0d8b70";
   boxes[z].style.color = "white";
+  // winning.innerHTML = (currentPlayerName + " has won!");
   gameStatus = false;
+  
 }
